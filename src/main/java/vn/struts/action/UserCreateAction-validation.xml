@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE validators PUBLIC
+    "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+	<field name="username">
+
+
+		<field-validator type="stringlength">
+			<param name="minLength">6</param>
+			<param name="maxLength">20</param>
+			<param name="trim">true</param>
+			<message>Tài khoản phải từ 6 - 20 ký tự</message>
+		</field-validator>
+	</field>
+
+
+	<field name="password">
+
+
+		<field-validator type="stringlength">
+			<param name="minLength">6</param>
+			<param name="maxLength">18</param>
+			<param name="trim">true</param>
+			<message>Mật khẩu phải từ 6 - 18 ký tự</message>
+		</field-validator>
+	</field>
+
+	<field name="confirm">
+		<field-validator type="fieldexpression">
+			<param name="expression"><![CDATA[password == confirm]]></param>
+			<message>Xác nhận mật khẩu không khớp</message>
+		</field-validator>
+		
+		<field-validator type="stringlength">
+			<param name="minLength">6</param>
+			<param name="maxLength">18</param>
+			<param name="trim">true</param>
+			<message>Xác nhận mật khẩu phải từ 6 - 18 ký tự</message>
+		</field-validator>
+
+	</field>
+
+	<field name="name">
+		<field-validator type="stringlength">
+			<param name="trim">true</param>
+			<param name="minLength">1</param>
+			<param name="maxLength">24</param>
+			<message>Họ tên không được trống</message>
+		</field-validator>
+
+	</field>
+</validators>

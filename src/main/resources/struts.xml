@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+   "http://struts.apache.org/dtds/struts-2.5.dtd">
+   
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<constant name="struts.locale" value="vi_VN" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.mapper.class" value="rest"/>
+	<constant name="struts.mapper.prefixMapping" value="/rest:rest,:struts"/> 
+	<constant name="struts.convention.action.suffix" value="Controller"/>
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>
+    <constant name="struts.convention.default.parent.package" value="rest-default"/>
+    <constant name="struts.convention.package.locators" value="admin,client"/> 
+    <package name="admin" namespace="/admin"  extends="rest-default" >
+   		<interceptors>
+			<interceptor class="vn.struts.interceptors.AuthenticationInterceptor"
+				name="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="restDefaultStack"/>
+				<interceptor-ref name="fileUpload">
+				  <param name="allowedTypes">image/png,image/jpeg</param>
+				  <param name="maximumSize">500000</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="login">/WEB-INF/admin/loginAdmin.jsp</result>
+		</global-results>  
+   		<global-allowed-methods>index,show,create,update,destroy,deleteConfirm,edit,editNew</global-allowed-methods>	   
+   	</package>
+   
+   	<package name="client" namespace="/"  extends="rest-default" >
+   		<global-allowed-methods>index,show,create,update,destroy,deleteConfirm,edit,editNew</global-allowed-methods>	   
+   	</package>
+</struts>
