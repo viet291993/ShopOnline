@@ -10,7 +10,7 @@ s<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="U
 						  <br/>						     
 							<s:form action="catalog" method="post" class="form-horizontal form-label-left" theme="simple">
 							    <div class="form-group">
-							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Tên danh mục<span class="required">*</span> </label>
+							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.catalog-name"/><span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="name" name="name" maxlength="50" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -22,13 +22,13 @@ s<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="U
 							    </div>
 							    <div class="form-group">
 							    	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-							        	<s:submit value="Xác nhận"  cssClass="btn btn-primary"/>
+							        	<s:submit key="admin.confirm"  cssClass="btn btn-primary"/>
 						 			</div>
 							    </div>
 							   
 							    
 						  </s:form>
-						  <a href="${pageContext.servletContext.contextPath}/admin/catalog" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</a>					                        
+						  <a href="${pageContext.servletContext.contextPath}/admin/catalog" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> <s:text name="admin.back"/></a>					                        
 					 </div>
   </jsp:attribute>
 	<jsp:attribute name="footer">

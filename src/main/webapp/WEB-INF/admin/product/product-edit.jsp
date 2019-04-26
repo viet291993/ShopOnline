@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<t:template title="Danh mục" title1="Sửa danh mục">
+<t:template title="Sản phẩm" title1="Sửa sản phẩm">
 
 	<jsp:attribute name="content">	 
                    <div class="clearfix"></div>
@@ -12,7 +12,7 @@
 							 <s:hidden name="_method" value="put" />	
 						  <%-- Hình ảnh --%>
 								<div class="form-group">
-							     	<label for="image" class="control-label col-md-3 col-sm-3 col-xs-12">Hình ảnh <span class="required">*</span> </label>
+							     	<label for="image" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.product-image"/><span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								    	<img  id="image"  height="200px" 	src="images/products/<s:property value='image'/>"/>
 								        <s:hidden id="txtanhgoc" name="image" />
@@ -26,14 +26,14 @@
 							    </div>
 							     <%-- Mã sản phẩm --%>
 							     <div class="form-group">
-							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Mã sản phẩm <span class="required">*</span> </label>
+							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.product-code"/> <span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="id" name="id" disabled="true" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
 								 </div>
 							    <%-- Tên sản phẩm --%>
 							     <div class="form-group">
-							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Tên sản phẩm <span class="required">*</span> </label>
+							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.product-name"/><span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="name" name="name" maxlength="50" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -45,7 +45,7 @@
 							    </div>
 							    <%-- Giá sản phẩm --%>
 							     <div class="form-group">
-							     	<label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">Giá sản phẩm <span class="required">*</span> </label>
+							     	<label for="price" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.product-price"/> <span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="price" name="price" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -57,7 +57,7 @@
 							    </div>
 							    <%-- Nội dung --%>
 							     <div class="form-group">
-							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12">Nội dung <span class="required">*</span> </label>
+							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.product-content"/> <span class="required">*</span> </label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textarea id="content" name="content" maxlength="255" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -69,7 +69,7 @@
 							    </div>
 							    <%-- Danh mục --%>
 							     <div class="form-group">
-							     	<label for="product" class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục</label>
+							     	<label for="product" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.catalog"/></label>
 							    	<div class="col-md-6 col-sm-6 col-xs-12">
 							        	<s:select  id="catalog" name="catalog.id"
 							        	 class="form-control col-md-7 col-xs-12"
@@ -83,11 +83,11 @@
 							    </div>
 							    <div class="form-group">
 							    	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-							        	<s:submit value="Xác nhận"  cssClass="btn btn-primary"/>
+							        	<s:submit key="admin.confirm"  cssClass="btn btn-primary"/>
 						 			</div>
 							    </div>
 						  </s:form>
-						  <a href="${pageContext.servletContext.contextPath}/admin/product" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</a>					                        
+						  <a href="${pageContext.servletContext.contextPath}/admin/product" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> <s:text name="admin.back"/></a>					                        
 					 </div>
   </jsp:attribute>
 

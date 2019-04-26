@@ -20,11 +20,11 @@
                <table id="datatable-buttons" class="table table-striped table-bordered">                         
                   <thead>                         
                     <tr>              
-                       <th>STT</th>
-                       <th>Tên danh mục</th>
+                       <th><s:text name="admin.no"/></th>
+                       <th><s:text name="admin.catalog-name"/></th>
                        <th align="center"><a href="${pageContext.servletContext.contextPath}/admin/catalog/new"
 							type="button" class="btn btn-success btn-xs">
-							<span data-toggle="tooltip" title="Thêm mới" class="glyphicon glyphicon-plus"></span></a></th>
+							<span data-toggle="tooltip"  title="Thêm mới" class="glyphicon glyphicon-plus"></span></a></th>
                    </tr>
                  </thead>       
                   <tbody>
@@ -52,19 +52,19 @@
        							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 								</button>
-        							<h4 class="modal-title custom_align" id="Heading">Xóa danh mục</h4>
+        							<h4 class="modal-title custom_align" id="Heading"><s:text name="msg.deleteCatalog"/></h4>
      						 </div>
           <div class="modal-body">      
        			<div class="alert alert-danger">
-				<span class="glyphicon glyphicon-warning-sign"></span> Bạn có muốn xóa danh mục <span id="nd"></span>  ?</div>
+				<span class="glyphicon glyphicon-warning-sign"></span> <s:text name="msg.deleteCatalog?"/> <span id="nd"></span>  ?</div>
        
      	 </div>
         <div class="modal-footer ">
         	 <form id="idDelelte" action="#" method="post">
        		 	<button class="btn btn-success">
-				<span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+				<span class="glyphicon glyphicon-ok-sign"></span> <s:text name="msg.ok"/></button>
        			<button type="button" class="btn btn-default" data-dismiss="modal">
-					<span class="glyphicon glyphicon-remove"></span> Hủy bỏ
+					<span class="glyphicon glyphicon-remove"></span> <s:text name="msg.cancel"/>
 				</button>
 			</form>	
      				</div>
