@@ -3,8 +3,11 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<s:set var="title" value="%{getText('admin.catalog')}"/>
+<s:set var="title1" value="%{getText('admin.catalog-list')}"/>
+<t:template title="${title}" title1="${title1}">
 
-<t:template title="Danh mục" title1="Danh sách danh mục">
+
 	<jsp:attribute name="head">
  <!-- Datatables -->
     <link href="resources/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -24,7 +27,7 @@
                        <th><s:text name="admin.catalog-name"/></th>
                        <th align="center"><a href="${pageContext.servletContext.contextPath}/admin/catalog/new"
 							type="button" class="btn btn-success btn-xs">
-							<span data-toggle="tooltip"  title="Thêm mới" class="glyphicon glyphicon-plus"></span></a></th>
+							<span data-toggle="tooltip"  title="<s:text name='admin.new'/>" class="glyphicon glyphicon-plus"></span></a></th>
                    </tr>
                  </thead>       
                   <tbody>
@@ -34,11 +37,11 @@
 					  	    <td><s:property value="name"/></td>
 					  	    <td  width="12%" align="center">
 					  	    	<a type="button"  href="${pageContext.request.contextPath}/admin/catalog/<s:property value='id'/>" class="btn btn-default btn-xs">
-					  	      		<span data-toggle="tooltip" title="Xem" class="glyphicon glyphicon-eye-open"></span></a>
+					  	      		<span data-toggle="tooltip" title="<s:text name='admin.show'/>" class="glyphicon glyphicon-eye-open"></span></a>
 					  	    	<a type="button"  href="${pageContext.request.contextPath}/admin/catalog/<s:property value='id'/>/edit" class="btn btn-primary btn-xs">
-					  	      		<span data-toggle="tooltip" title="Sửa" class="glyphicon glyphicon-pencil"></span></a>
+					  	      		<span data-toggle="tooltip" title="<s:text name='admin.edit'/>" class="glyphicon glyphicon-pencil"></span></a>
 					  	   	    <a type="button" onclick="chayNgayDi(<s:property value="id"/>,'<s:property value="name"/>')" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete">
-									<span data-toggle="tooltip" title="Xóa" class="glyphicon glyphicon-trash"></span></a>
+									<span data-toggle="tooltip" title="<s:text name='admin.delete'/>" class="glyphicon glyphicon-trash"></span></a>
 					  	    </td>
 					     </tr>
 					</s:iterator>                                                          

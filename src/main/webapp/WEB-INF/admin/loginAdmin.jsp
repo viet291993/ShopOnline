@@ -205,14 +205,14 @@ fieldset{
 
         <s:form id="form" action="login" method="post" theme="simple">
           <fieldset class="clearfix">
-          	<s:fielderror fieldName="login" /><s:text name="username"></s:text>
-            <p ><span class="fa fa-user"></span><s:textfield name="username" placeholder="Tài khoản"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
+          	<s:fielderror fieldName="login" />
+            <p ><span class="fa fa-user"></span><s:textfield name="username" placeholder="%{getText('admin.username')}"/></p> <!-- JS because of IE support; better: placeholder="Username" -->
             <s:fielderror fieldName="username" />
-            <p><span class="fa fa-lock"></span><s:password name="password"  placeholder="Mật khẩu"/></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><span class="fa fa-lock"></span><s:password name="password"  placeholder="%{getText('admin.password')}"/></p> <!-- JS because of IE support; better: placeholder="Password" -->
             <s:fielderror fieldName="password" />
              <div>
-                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Quên mật khẩu ?</a></span>
-                                <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Đăng nhập"></span>
+                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#"><s:text name="admin.forgotPassword"></s:text> ?</a></span>
+                                <span style="width:50%; text-align:right;  display: inline-block;"><s:submit key="admin.login"/></span>
                             </div>
 
           </fieldset>

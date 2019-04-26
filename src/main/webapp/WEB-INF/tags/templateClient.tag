@@ -10,7 +10,7 @@
 
 <html lang="en">
 <head>
-<title>Home</title>
+<title>FishShop</title>
 <base href="${pageContext.servletContext.contextPath}/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

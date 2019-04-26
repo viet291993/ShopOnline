@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<t:template title="Hóa đơn" title1="Hóa đơn chi tiết">
+<s:set var="title" value="%{getText('admin.bill')}"/>
+<s:set var="title1" value="%{getText('admin.bill-edit')}"/>
+<t:template title="${title}" title1="${title1}">
 
 	<jsp:attribute name="content">	
 		<fmt:setLocale value="vi_VN"/>  
@@ -14,7 +16,7 @@
 							 <s:hidden name="_method" value="put" />	
 							<%-- Mã hóa đơn --%>
 							     <div class="form-group">
-							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12">Mã hóa đơn</label>
+							     	<label for="name" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-code"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="id"  disabled="true" name="id" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -26,7 +28,7 @@
 							    </div>
 							    <%-- Ngày đặt hàng --%>
 							     <div class="form-group">
-							     	<label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">Ngày đặt hàng</label>
+							     	<label for="price" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-date"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								       <s:textfield disabled="true" name="created" format="dd-MM-yyyy"  class="form-control  col-md-7 col-xs-12"/>
 								    </div>
@@ -38,7 +40,7 @@
 							    </div>
 							    <%-- Tên khách hàng --%>
 							     <div class="form-group">
-							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12">Tên khách hàng</label>
+							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-customer-name"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="name" name="name" maxlength="50" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -50,7 +52,7 @@
 							    </div>
 							    <%-- Địa chỉ --%>
 							     <div class="form-group">
-							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12">Địa chỉ</label>
+							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-customer-address"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textarea id="address" name="address" maxlength="255" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -62,7 +64,7 @@
 							    </div>
 							     <%-- Số điện thoại --%>
 							     <div class="form-group">
-							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12">Số điện thoại</label>
+							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-customer-phone"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textfield id="phone" name="phone" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -86,7 +88,7 @@
 							    </div>
 							    <%-- Tin nhắn --%>
 							     <div class="form-group">
-							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12">Tin nhắn</label>
+							     	<label for="content" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-customer-messenger"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
 								        <s:textarea id="messages" name="message" maxlength="255" class="form-control col-md-7 col-xs-12" /> 
 								    </div>
@@ -99,7 +101,7 @@
 							   
 							     <%-- Trạng thái --%>
 							     <div class="form-group">
-							     	<label for="product" class="control-label col-md-3 col-sm-3 col-xs-12">Trạng thái</label>
+							     	<label for="product" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-status"/></label>
 							    	<div class="col-md-6 col-sm-6 col-xs-12">
 							        	<s:select  id="status" name="status" class="form-control col-md-7 col-xs-12"
 										list="#{'false':'Chưa xử lý', 'true':'Đã xử lý'}" />
@@ -114,7 +116,7 @@
 							    <!-- Xác nhận -->
 							     <div class="form-group">
 							    	<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-							        	<s:submit value="Xác nhận"  cssClass="btn btn-primary"/>
+							        	<s:submit key="admin.confirm"  cssClass="btn btn-primary"/>
 						 			</div>
 							    </div>
 						  </s:form>
@@ -123,13 +125,13 @@
 						   <table id="datatable" class="table table-striped table-bordered bulk_action">
                       <thead>
                         <tr>                        
-						  <th width="5px">STT</th>
-                       	  <th>Hình ảnh</th>						 
-                          <th>Mã sản phẩm</th>
-                          <th>Tên sản phẩm</th>
-                          <th>Giá sản phẩm</th>
-                          <th>Số lượng</th>
-                          <th>Thành tiền</th>
+						  <th width="5px"><s:text name="admin.no"/></th>
+                       	  <th><s:text name="admin.product-image"/></th>						 
+                          <th><s:text name="admin.product-code"/></th>
+                          <th><s:text name="admin.product-name"/></th>
+                          <th><s:text name="admin.product-price"/></th>
+                          <th><s:text name="admin.product-qty"/></th>
+                          <th><s:text name="admin.product-image"/></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -145,12 +147,12 @@
 					  	 </tr>
                       	</s:iterator>
                       	 <tr>
-                      	 	<td align="center" colspan="6"><b>Tổng tiền</b></td>
+                      	 	<td align="center" colspan="6"><b><s:text name="admin.bill-total"/></b></td>
                       	 	<td align="right"><fmt:formatNumber type="currency" ><s:property value="amount"/></fmt:formatNumber></td>
                       	 </tr>
                       </tbody>
                     </table>
-						  <a href="${pageContext.servletContext.contextPath}/admin/transaction" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> Quay lại</a>					                        
+						  <a href="${pageContext.servletContext.contextPath}/admin/transaction" class="btn btn-info" type="button">  <span class="glyphicon glyphicon-arrow-left"></span> <s:text name="admin.back"/></a>					                        
 					 </div>
   </jsp:attribute>
 

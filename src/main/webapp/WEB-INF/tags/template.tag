@@ -38,8 +38,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="images/favicon.ico" type="image/ico" />
-<title>Home</title>
+<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<title>FishShop Admin</title>
 <base href="${pageContext.servletContext.contextPath}/">
 
 <!-- Bootstrap -->
@@ -95,7 +95,8 @@
 								</a></li>
 								<li><a
 									href="${pageContext.servletContext.contextPath}/admin/user"><i
-										class="fa fa-user"></i> <s:text name="admin.customer"/> <span></span></a></li>
+										class="fa fa-user"></i> <s:text name="admin.customer"/> 
+										<span class="label label-success pull-right"><s:text name="admin.comingSoon"/></span></a></li>
 								<li>
 								<li>
 								<a
@@ -111,15 +112,15 @@
 						</div>
 
 						<div class="menu_section">
-							<h3><s:text name="admin.username"/></h3>
+							<h3><s:text name="admin.personal"/></h3>
 							<ul class="nav side-menu">
-								<li><a href="${pageContext.servletContext.contextPath}/User/Profile"><i class="fa fa-info-circle"></i> Thông tin cá nhân </a>
+								<li><a href="${pageContext.servletContext.contextPath}/User/Profile"><i class="fa fa-info-circle"></i> <s:text name='admin.personalInformation'/> </a>
 									</li>
-								<li><a><i class="fa fa-envelope"></i> Hòm thư
-									<span class="label label-success pull-right">Coming Soon</span></a>
+								<li><a><i class="fa fa-envelope"></i> <s:text name="admin.mailbox"/>
+									<span class="label label-success pull-right"><s:text name="admin.comingSoon"/></span></a>
 									</li>
 
-								<li><a href="${pageContext.servletContext.contextPath}/User/ChangePassword"><i class="fa fa-key"></i>Đổi mật khẩu </a></li>
+								<li><a href="${pageContext.servletContext.contextPath}/User/ChangePassword"><i class="fa fa-key"></i><s:text name='admin.changepassword'/> </a></li>
 							</ul>
 						</div>
 
@@ -128,13 +129,13 @@
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
-						<a data-toggle="tooltip" data-placement="top" title="Cài đặt">
+						<a data-toggle="tooltip" data-placement="top" title="<s:text name='admin.setting'/>">
 							<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 						</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
 							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
 						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
 							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="<s:text name='admin.loguot'/>"
+						</a> <a data-toggle="tooltip" data-placement="top" title="<s:text name='admin.logout'/>"
 							href="${pageContext.servletContext.contextPath}/admin/logout">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
@@ -159,11 +160,11 @@
 								<img  alt="..." src="images/Icon/admin.jpg">${sessionScope.ADMIN.name}   <span class=" fa fa-angle-down"></span>
 							</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="${pageContext.servletContext.contextPath}/User/Profile">Thông tin cá nhân</a></li>
+									<li><a href="${pageContext.servletContext.contextPath}/User/Profile"><s:text name="admin.personalInformation"/></a></li>
 									<li><a href="javascript:;"> <span
-											class="badge bg-red pull-right"></span> <span>Cài đặt</span>
+											class="badge bg-red pull-right"></span> <span><s:text name="admin.setting"/></span>
 									</a></li>
-									<li><a href="javascript:;">Trợ giúp</a></li>
+									<li><a href="javascript:;"><s:text name="admin.help"/></a></li>
 									<li><a
 										href="${pageContext.servletContext.contextPath}/admin/logout"><i
 											class="fa fa-sign-out pull-right"></i><s:text name="admin.logout"/></a></li>

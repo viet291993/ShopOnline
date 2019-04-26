@@ -2,7 +2,9 @@ s<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="U
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<t:template title="Danh mục" title1="Thêm danh mục">
+<s:set var="title" value="%{getText('admin.catalog')}"/>
+<s:set var="title1" value="%{getText('admin.catalog-new')}"/>
+<t:template title="${title}" title1="${title1}">
 
 	<jsp:attribute name="content">	 
                    <div class="clearfix"></div>

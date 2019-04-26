@@ -4,8 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
-<t:template title="Hóa đơn" title1="Danh sách hóa đơn">
+<s:set var="title" value="%{getText('admin.bill')}"/>
+<s:set var="title1" value="%{getText('admin.bill-list')}"/>
+<t:template title="${title}" title1="${title1}">
 	<jsp:attribute name="head">
  <!-- Datatables -->
     <link href="resources/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -21,14 +22,14 @@
                <table id="datatable-buttons" class="table table-striped table-bordered">                         
                   <thead>                         
                     <tr>              
-                       <th>STT</th>
-                       <th>Mã hóa đơn</th>
-                       <th>Ngày đặt hàng</th>
-                       <th>Tên khách hàng</th>
-                       <th>Địa chỉ</th>
-                       <th>SĐT</th>
-                       <th>Tổng tiền</th>
-                       <th>Trạng thái</th>
+                       <th><s:text name="admin.no"/></th>
+                       <th><s:text name="admin.bill-code"/></th>
+                       <th><s:text name="admin.bill-date"/></th>
+                       <th><s:text name="admin.bill-customer-name"/></th>
+                       <th><s:text name="admin.bill-customer-address"/></th>
+                       <th><s:text name="admin.bill-customer-phone"/></th>
+                       <th><s:text name="admin.bill-total"/></th>
+                       <th><s:text name="admin.bill-status"/></th>
                        <th></th>
                    </tr>
                  </thead>       
@@ -51,11 +52,11 @@
 							</s:else>
 					  	    <td  width="12%" align="center">
 					  	    	<a type="button"  href="${pageContext.request.contextPath}/admin/transaction/<s:property value='id'/>" class="btn btn-default btn-xs">
-					  	      		<span data-toggle="tooltip" title="Xem" class="glyphicon glyphicon-eye-open"></span></a>
+					  	      		<span data-toggle="tooltip" title="<s:text name='admin.show'/>" class="glyphicon glyphicon-eye-open"></span></a>
 					  	    	<a type="button"  href="${pageContext.request.contextPath}/admin/transaction/<s:property value='id'/>/edit" class="btn btn-primary btn-xs">
-					  	      		<span data-toggle="tooltip" title="Sửa" class="glyphicon glyphicon-pencil"></span></a>
+					  	      		<span data-toggle="tooltip" title="<s:text name='admin.edit'/>" class="glyphicon glyphicon-pencil"></span></a>
 					  	   	    <a type="button" onclick="chayNgayDi(<s:property value="id"/>)" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete">
-									<span data-toggle="tooltip" title="Xóa" class="glyphicon glyphicon-trash"></span></a>
+									<span data-toggle="tooltip" title="<s:text name='admin.delete'/>" class="glyphicon glyphicon-trash"></span></a>
 					  	    </td>
 					     </tr>
 					</s:iterator>                                                          
@@ -69,19 +70,19 @@
        							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 										<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 								</button>
-        							<h4 class="modal-title custom_align" id="Heading">Xóa danh mục</h4>
+        							<h4 class="modal-title custom_align" id="Heading"><s:text name="msg.deleteTransaction"/></h4>
      						 </div>
           <div class="modal-body">      
        			<div class="alert alert-danger">
-				<span class="glyphicon glyphicon-warning-sign"></span> Bạn có muốn xóa hóa đơn <span id="nd"></span>  ?</div>
+				<span class="glyphicon glyphicon-warning-sign"></span> <s:text name="msg.deleteTransaction?"/> <span id="nd"></span>  ?</div>
        
      	 </div>
         <div class="modal-footer ">
         	 <form id="idDelelte" action="#" method="post">
        		 	<button class="btn btn-success">
-				<span class="glyphicon glyphicon-ok-sign"></span> Đồng ý</button>
+				<span class="glyphicon glyphicon-ok-sign"></span><s:text name="msg.ok"/></button>
        			<button type="button" class="btn btn-default" data-dismiss="modal">
-					<span class="glyphicon glyphicon-remove"></span> Hủy bỏ
+					<span class="glyphicon glyphicon-remove"></span> <s:text name="msg.cancel"/>
 				</button>
 			</form>	
      				</div>

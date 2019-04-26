@@ -13,9 +13,9 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 import vn.struts.dao.CatalogDAO;
 import vn.struts.dao.ProductDAO;
@@ -31,7 +31,7 @@ import vn.struts.entity.Catalog;
 		@Result(name = "editNew", location = "/WEB-INF/admin/catalog/catalog-editNew.jsp"),
 		@Result(name = "edit", location = "/WEB-INF/admin/catalog/catalog-edit.jsp"),
 		@Result(name = "show", location = "/WEB-INF/admin/catalog/catalog-show.jsp") })
-public class CatalogController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class CatalogController extends ActionSupport implements ModelDriven<Object>, Validateable {
 
 	/**
 	 * 
@@ -80,13 +80,13 @@ public class CatalogController extends ValidationAwareSupport implements ModelDr
 	// DELETE /admin/catalog/1
 	public HttpHeaders destroy() {
 		if (!productDAO.getByCatalogId(id).isEmpty()) {
-			addActionError("Xoá thư mục thất bại , bạn phải xóa sản phẩm trong danh mục trước");
+			addActionError(getText("msg.catalogDelete.error-relationship"));
 			return index();
 		}
 		if (catalogDAO.delete(id)) {
-			addActionMessage("Xóa thư mục thàng công");
+			addActionMessage(getText("msg.catalogDelete.success"));
 		} else {
-			addActionError("Xoá thư mục thất bại");
+			addActionError(getText("msg.catalogDelete.error"));
 		}
 		return index();
 	}
@@ -94,9 +94,9 @@ public class CatalogController extends ValidationAwareSupport implements ModelDr
 	// POST /admin/catalog
 	public HttpHeaders create() {
 		if (catalogDAO.create(model)) {
-			addActionMessage("Thêm thư mục thàng công");
+			addActionMessage(getText("msg.catalogNew.success"));
 		} else {
-			addActionError("Thêm thư mục thất bại");
+			addActionError(getText("msg.catalogNew.error"));
 		}
 		return new DefaultHttpHeaders("editNew").setLocationId(model.getId());
 	}
@@ -104,9 +104,9 @@ public class CatalogController extends ValidationAwareSupport implements ModelDr
 	// PUT /admin/catalog/1
 	public String update() {
 		if (catalogDAO.update(model)) {
-			addActionMessage("Sửa thư mục thàng công");
+			addActionMessage(getText("msg.catalogEdit.success"));
 		} else {
-			addActionError("Sửa thư mục thất bại");
+			addActionError(getText("msg.catalogEdit.error"));
 		}
 		return "edit";
 	}
@@ -128,7 +128,7 @@ public class CatalogController extends ValidationAwareSupport implements ModelDr
 	@Override
 	public void validate() {
 		if (model.getName() == null || model.getName().length() == 0) {
-			addFieldError("name", "Tên thư mục không được trống");
+			addFieldError("name",getText("msg.catalogName.required"));
 		}
 	}
 

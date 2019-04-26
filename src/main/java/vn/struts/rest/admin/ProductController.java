@@ -19,9 +19,9 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 import vn.struts.dao.CatalogDAO;
 import vn.struts.dao.OrderDAO;
@@ -38,7 +38,7 @@ import vn.struts.entity.Product;
 		@Result(name = "editNew", location = "/WEB-INF/admin/product/product-editNew.jsp"),
 		@Result(name = "edit", location = "/WEB-INF/admin/product/product-edit.jsp"),
 		@Result(name = "show", location = "/WEB-INF/admin/product/product-show.jsp") })
-public class ProductController extends ValidationAwareSupport
+public class ProductController extends ActionSupport
 		implements ModelDriven<Object>, ServletRequestAware, Validateable {
 
 	/**
@@ -97,13 +97,13 @@ public class ProductController extends ValidationAwareSupport
 	// DELETE /admin/product/1
 	public HttpHeaders destroy() {
 		if (!orderDAO.getByProductId(id).isEmpty()) {
-			addActionError("Xoá sản phẩm thất bại , bạn phải xóa hóa đơn có sản phẩm trước");
+			addActionError(getText("msg.productDelete.error-relationship"));
 			return index();
 		}
 		if (productDAO.delete(id)) {
-			addActionMessage("Xóa sản phẩm thàng công");
+			addActionMessage(getText("msg.productDelete.success"));
 		} else {
-			addActionError("Xoá sản phẩm thất bại");
+			addActionError(getText("msg.productDelete.error"));
 		}
 		return index();
 	}
@@ -112,9 +112,9 @@ public class ProductController extends ValidationAwareSupport
 	public HttpHeaders create() {
 		model.setCreated(new Date());
 		if (productDAO.create(model)) {
-			addActionMessage("Thêm sản phẩm thàng công");
+			addActionMessage(getText("msg.productNew.success"));
 		} else {
-			addActionError("Thêm sản phẩm thất bại");
+			addActionError(getText("msg.productNew.error"));
 		}
 		return new DefaultHttpHeaders("editNew").setLocationId(model.getId());
 	}
@@ -122,9 +122,9 @@ public class ProductController extends ValidationAwareSupport
 	// PUT /admin/product/1
 	public String update() {
 		if (productDAO.update(model)) {
-			addActionMessage("Sửa sản phẩm thàng công");
+			addActionMessage(getText("msg.productEdit.success"));
 		} else {
-			addActionError("Sửa sản phẩm thất bại");
+			addActionError(getText("msg.productEdit.error"));
 		}
 		return "edit";
 	}
@@ -168,25 +168,25 @@ public class ProductController extends ValidationAwareSupport
 	@Override
 	public void validate() {
 		if (!model.getName().matches("^\\S+.*")) {
-			addFieldError("name", "Tên sản phẩm không được bắt đầu bằng khoảng trống và dưới 100 ký tự");
+			addFieldError("name",getText("msg.productName.required"));
 		}
 		if (model.getImage().isEmpty() && file == null) {
-			addFieldError("image", "Ảnh sản phẩm không được trống");
+			addFieldError("image", getText("msg.productImage.required"));
 		} else if (file != null) {
 			if (!uploadPhoto(file, filename)) {
-				addFieldError("image", "Lỗi tải ảnh sản phẩm");
+				addFieldError("image",getText("msg.productImage.error") );
 			} else {
 				model.setImage(filename);
 			}
 		}
 		if (!model.getContent().matches("^\\S+.*")) {
-			addFieldError("content", "Nội dung sản phẩm không được trống và bắt đầu bằng khoảng trắng");
+			addFieldError("content", getText("msg.productContent.required"));
 		}
 		if (model.getPrice() == 0) {
-			addFieldError("price", "Giá sản phẩm không được trống");
+			addFieldError("price", getText("msg.productPrice.required"));
 		}
 		if (model.getCatalog().getId() == null) {
-			addFieldError("catalog", "Danh mục không được trống");
+			addFieldError("catalog",getText("msg.productCatalog.required"));
 		}
 	}
 

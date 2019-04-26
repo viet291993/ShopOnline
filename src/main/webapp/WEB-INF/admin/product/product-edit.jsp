@@ -2,7 +2,9 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<t:template title="Sản phẩm" title1="Sửa sản phẩm">
+<s:set var="title" value="%{getText('admin.product')}"/>
+<s:set var="title1" value="%{getText('admin.product-edit')}"/>
+<t:template title="${title}" title1="${title1}">
 
 	<jsp:attribute name="content">	 
                    <div class="clearfix"></div>

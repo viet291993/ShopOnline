@@ -31,9 +31,9 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 import vn.struts.dao.AdminDAO;
 import vn.struts.entity.Admin;
@@ -44,7 +44,7 @@ import vn.struts.entity.Admin;
 @Results({ @Result(name = "success", type = "redirectAction", params = { "actionName", "login" }),
 		@Result(name = "home", type = "redirectAction", params = { "actionName", "home" }),
 		@Result(name = "editNew", location = "/WEB-INF/admin/loginAdmin.jsp"), })
-public class LoginController extends ValidationAwareSupport implements ModelDriven<Object>, SessionAware, Validateable {
+public class LoginController extends ActionSupport implements ModelDriven<Object>, SessionAware, Validateable {
 
 	/**
 	 * 
@@ -73,7 +73,7 @@ public class LoginController extends ValidationAwareSupport implements ModelDriv
 			session.put("ADMIN", admin);
 			return new DefaultHttpHeaders("home").setLocationId(model.getId());
 		} else {
-			addFieldError("login", "Tài khoản hoặc mật khẩu không đúng");
+			addFieldError("login", getText("msg.login-fail"));
 			return new DefaultHttpHeaders("editNew").disableCaching();
 		}
 	}
@@ -92,10 +92,10 @@ public class LoginController extends ValidationAwareSupport implements ModelDriv
 	@Override
 	public void validate() {
 		if (model.getUsername() == null || model.getUsername().length() == 0) {
-			addFieldError("username", "Tài khoản không được trống");
+			addFieldError("username", getText("msg.userName-required"));
 		}
 		if (model.getPassword() == null || model.getPassword().length() == 0) {
-			addFieldError("password", "Mật khẩu không được trống");
+			addFieldError("password", getText("msg.password-required"));
 		}
 		
 	}

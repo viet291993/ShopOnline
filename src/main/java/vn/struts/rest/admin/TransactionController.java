@@ -13,9 +13,9 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 import vn.struts.dao.OrderDAO;
 import vn.struts.dao.TransactionDAO;
@@ -23,14 +23,14 @@ import vn.struts.entity.Order;
 import vn.struts.entity.Transaction;
 
 @InterceptorRef("loginStack")
-@ParentPackage(value ="admin")
+@ParentPackage(value = "admin")
 @Namespace("/admin")
 @Action(value = "transaction")
 @Results({ @Result(name = "success", type = "redirectAction", params = { "actionName", "transaction" }),
 		@Result(name = "index", location = "/WEB-INF/admin/transaction/transaction-index.jsp"),
 		@Result(name = "edit", location = "/WEB-INF/admin/transaction/transaction-edit.jsp"),
 		@Result(name = "show", location = "/WEB-INF/admin/transaction/transaction-show.jsp") })
-public class TransactionController extends ValidationAwareSupport implements ModelDriven<Object>,Validateable {
+public class TransactionController extends ActionSupport implements ModelDriven<Object>, Validateable {
 
 	/**
 	 * 
@@ -40,12 +40,11 @@ public class TransactionController extends ValidationAwareSupport implements Mod
 	private Long id;
 	private Collection<Transaction> listTransaction;
 	private Collection<Order> listOrder;
-	
 
 	@Autowired
 	@Qualifier("TransactionDAO")
 	private TransactionDAO transactionDAO;
-	
+
 	@Autowired
 	@Qualifier("OrderDAO")
 	private OrderDAO orderDAO;
@@ -77,13 +76,13 @@ public class TransactionController extends ValidationAwareSupport implements Mod
 	public String deleteConfirm() {
 		return "deleteConfirm";
 	}
-	
+
 	// DELETE /admin/transaction/1
 	public HttpHeaders destroy() {
 		if (transactionDAO.delete(id)) {
-			addActionMessage("Xóa hóa đơn thàng công");
+			addActionMessage( getText("msg.transactionDelete.success"));
 		} else {
-			addActionError("Xoá hóa đơn thất bại");
+			addActionError( getText("msg.transactionDelete.error"));
 		}
 		return index();
 	}
@@ -91,13 +90,13 @@ public class TransactionController extends ValidationAwareSupport implements Mod
 	// PUT /admin/transaction/1
 	public String update() {
 		if (transactionDAO.update(model)) {
-			addActionMessage("Sửa hóa đơn thàng công");
+			addActionMessage( getText("msg.transactionEdit.success"));
 		} else {
-			addActionError("Sửa hóa đơn thất bại");
+			addActionError( getText("msg.transactionDelete.error"));
 		}
 		return "edit";
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -106,9 +105,6 @@ public class TransactionController extends ValidationAwareSupport implements Mod
 		model = transactionDAO.findById(id);
 		this.id = id;
 	}
-	
-	
-	
 
 	public Collection<Order> getListOrder() {
 		listOrder = orderDAO.getByTransactionId(id);
@@ -127,20 +123,20 @@ public class TransactionController extends ValidationAwareSupport implements Mod
 	@Override
 	public void validate() {
 		if (!model.getName().matches("^\\S+.{0,49}$")) {
-			addFieldError("name", "Họ tên không được bắt đầu bằng khoảng trống và dưới 50 ký tự");
+			addFieldError("name", getText("msg.transactionName.required"));
 		}
 		if (!model.getAddress().matches("^\\S+.{0,250}")) {
-			addFieldError("address", "Địa chỉ không được trống và bắt đầu bằng khoảng trắng");
+			addFieldError("address", getText("msg.transactionAddress.required"));
 		}
 		if (!model.getPhone().matches("[0-9]{8,10}")) {
-			addFieldError("phone", "Số điện thoại sai định dạng");
+			addFieldError("phone", getText("msg.transactionPhone.required"));
 		}
 		if (!model.getEmail().matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")) {
-			addFieldError("email", "Email sai định dạng");
+			addFieldError("email", getText("msg.transactionEmail.required"));
 		}
 		if (!model.getMessage().matches("^\\S+.{0,250}")) {
-			addFieldError("message", "Lời nhắn không được trống và bắt đầu bằng khoảng trắng");
+			addFieldError("message", getText("msg.transactionMessage.required"));
 		}
 	}
-	
+
 }
