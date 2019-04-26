@@ -26,19 +26,7 @@ public class UserDeleteAction extends ActionSupport implements ServletRequestAwa
 
 	@Override
 	public String execute() throws Exception {
-		try {
-			int id = Integer.parseInt(request.getParameter("id"));
-			boolean kq = adminDAO.delete(id);
-			if (kq) {
-				addActionError("Xóa tài khoản thành công");
-				return SUCCESS;
-			}
-			addActionError("Lỗi xóa");
 			return ERROR;
-		} catch (Exception e) {
-			addActionError("Lỗi xóa");
-			return ERROR;
-		}
 	}
 
 	@Override

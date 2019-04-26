@@ -28,9 +28,9 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public Admin findById(int id) {
+	public Admin findByUsername(String username) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Admin admin = (Admin) session.get(Admin.class, id);
+		Admin admin = (Admin) session.get(Admin.class, username);
 		return admin;
 	}
 
@@ -69,8 +69,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public boolean delete(int id) {
-		Admin admin = findById(id);
+	public boolean delete(String username) {
+		Admin admin = findByUsername(username);
 		if (admin == null) {
 			return false;
 		}

@@ -13,9 +13,9 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
 import vn.struts.dao.TransactionDAO;
 import vn.struts.entity.Order;
@@ -26,7 +26,7 @@ import vn.struts.entity.Transaction;
 @Action(value = "cart")
 @Results({ @Result(name = "success", type = "redirectAction", params = { "actionName", "cart" }),
 		@Result(name = "editNew", location = "/WEB-INF/client/cart-index.jsp") })
-public class CartController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
+public class CartController extends ActionSupport implements ModelDriven<Object>, Validateable {
 
 	/**
 	 * 
@@ -61,10 +61,8 @@ public class CartController extends ValidationAwareSupport implements ModelDrive
 		model.setCreated(new Date());
 		if (transactionDAO.create(model, listitem)) {
 			setNoti(1);
-			System.out.println("Thêm hóa đơn thàng công");
 		} else {
 			setNoti(2);
-			System.out.println("Thêm hóa đơn thất bại");
 		}
 		return new DefaultHttpHeaders("editNew").setLocationId(model.getId());
 	}
@@ -102,22 +100,22 @@ public class CartController extends ValidationAwareSupport implements ModelDrive
 	@Override
 	public void validate() {
 		if (listitem==null) {
-			addFieldError("list", "Chưa có sản phẩm trong giỏ hàng");
+			addFieldError("list",getText("msg.cartList.required") );
 		}
 		if (!model.getName().matches("^\\S+.*")) {
-			addFieldError("name", "Họ tên không được bắt đầu bằng khoảng trống và dưới 100 ký tự");
+			addFieldError("name",getText("msg.cartName.required") );
 		}
 		if (!model.getAddress().matches("^\\S+.*")) {
-			addFieldError("address", "Địa chỉ không được trống và bắt đầu bằng khoảng trắng");
+			addFieldError("address",getText("msg.cartAddress.required") );
 		}
 		if (!model.getPhone().matches("[0-9]{8,10}")) {
-			addFieldError("phone", "Số điện thoại sai định dạng");
+			addFieldError("phone", getText("msg.cartPhone.required"));
 		}
 		if (!model.getEmail().matches("^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$")) {
-			addFieldError("email", "Email sai định dạng");
+			addFieldError("email", getText("msg.cartEmail.required"));
 		}
 		if (!model.getMessage().matches("^\\S+.*")) {
-			addFieldError("message", "Lời nhắn không được trống và bắt đầu bằng khoảng trắng");
+			addFieldError("message", getText("msg.cartMessage.required"));
 		}
 		setNoti(0);
 	}

@@ -7,7 +7,7 @@ import vn.struts.entity.Admin;
 public interface AdminDAO {
 	List<Admin> getAll();
 
-	Admin findById(int id);
+	Admin findByUsername(String Username);
 	
 	Admin checkLogin(String Username, String password);
 
@@ -15,5 +15,5 @@ public interface AdminDAO {
 
 	boolean update(Admin admin);
 
-	boolean delete(int id);
+	boolean delete(String Username);
 }

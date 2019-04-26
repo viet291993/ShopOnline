@@ -60,7 +60,7 @@ public class LoginController extends ActionSupport implements ModelDriven<Object
 	// GET /admin /login
 	public HttpHeaders index() {
 		if(session.get("ADMIN")!=null) {
-			return new DefaultHttpHeaders("home").setLocationId(model.getId());
+			return new DefaultHttpHeaders("home").setLocationId(model.getUsername());
 		}
 		return new DefaultHttpHeaders("editNew").disableCaching();
 	}
@@ -71,7 +71,7 @@ public class LoginController extends ActionSupport implements ModelDriven<Object
 		Admin admin = adminDAO.checkLogin(model.getUsername(),model.getPassword());
 		if (admin != null) {
 			session.put("ADMIN", admin);
-			return new DefaultHttpHeaders("home").setLocationId(model.getId());
+			return new DefaultHttpHeaders("home").setLocationId(model.getUsername());
 		} else {
 			addFieldError("login", getText("msg.login-fail"));
 			return new DefaultHttpHeaders("editNew").disableCaching();

@@ -21,8 +21,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin findAdminById(int id) {		
-		return adminDAO.findById(id);
+	public Admin findAdminByUsername(String username) {		
+		return adminDAO.findByUsername(username);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean deleteAdmin(int id) {
-		return adminDAO.delete(id);
+	public boolean deleteAdmin(String username) {
+		return adminDAO.delete(username);
 	}
 
 }

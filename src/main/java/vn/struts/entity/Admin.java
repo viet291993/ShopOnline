@@ -3,8 +3,6 @@ package vn.struts.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -20,7 +18,6 @@ public class Admin implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7271764465482799007L;
-	private Integer id;
 	private String username;
 	private String password;
 	private String name;
@@ -36,18 +33,9 @@ public class Admin implements java.io.Serializable {
 		this.active = active;
 	}
 
+	
+
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	@Column(name = "username", unique = true, nullable = false, length = 32)
 	public String getUsername() {
 		return this.username;

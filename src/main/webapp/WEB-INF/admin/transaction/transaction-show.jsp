@@ -29,7 +29,7 @@
 							     <div class="form-group">
 							     	<label for="price" class="control-label col-md-3 col-sm-3 col-xs-12"><s:text name="admin.bill-date"/></label>
 								    <div class="col-md-6 col-sm-6 col-xs-12">
-								       <span  class="form-control  col-md-7 col-xs-12"><s:date name="created"  format="dd/MM/yyyy" /></span>
+								       <s:textfield disabled="true" name="created" format="dd-MM-yyyy"  class="form-control  col-md-7 col-xs-12"/>
 								    </div>
 							    </div>
 							     <div class="form-group">

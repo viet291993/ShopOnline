@@ -15,13 +15,14 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import vn.struts.dao.AdminDAO;
 import vn.struts.entity.Admin;
+import vn.struts.entity.User;
 
 
 @Action(value = "user")
 @Results({ @Result(name = "success", type = "redirectAction", params = { "actionName", "user" }),
 	@Result(name = "index", location = "/WEB-INF/content/admin-index.jsp") })
 public class userController implements ModelDriven<Object> {
-	private Admin model = new Admin();
+	private User model = new User();
 	private int id;
 	private Collection<Admin> list;
 
@@ -49,7 +50,6 @@ public class userController implements ModelDriven<Object> {
 
 	// GET /admin/new
 	public String editNew() {
-		model = new Admin();
 		return "editNew";
 	}
 
@@ -60,19 +60,16 @@ public class userController implements ModelDriven<Object> {
 
 	// DELETE /admin/1
 	public String destroy() {
-		adminDAO.delete(id);
 		return "success";
 	}
 
 	// POST /admin
 	public HttpHeaders create() {
-		adminDAO.create(model);
 		return new DefaultHttpHeaders("success").setLocationId(model.getId());
 	}
 
 	// PUT /admin/1
 	public String update() {
-		adminDAO.update(model);
 		return "success";
 	}
 
@@ -81,7 +78,6 @@ public class userController implements ModelDriven<Object> {
 	}
 
 	public void setId(int id) {
-		model = adminDAO.findById(id);
 		this.id = id;
 	}
 

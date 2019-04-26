@@ -211,7 +211,7 @@ fieldset{
             <p><span class="fa fa-lock"></span><s:password name="password"  placeholder="%{getText('admin.password')}"/></p> <!-- JS because of IE support; better: placeholder="Password" -->
             <s:fielderror fieldName="password" />
              <div>
-                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#"><s:text name="admin.forgotPassword"></s:text> ?</a></span>
+                                <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#"><s:text name="admin.forgotpassword"></s:text> ?</a></span>
                                 <span style="width:50%; text-align:right;  display: inline-block;"><s:submit key="admin.login"/></span>
                             </div>
 

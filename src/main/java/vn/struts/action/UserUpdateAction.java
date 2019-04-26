@@ -33,7 +33,6 @@ public class UserUpdateAction extends ActionSupport implements ServletRequestAwa
 	public String execute() throws Exception {
 		if (request.getMethod().equals("GET")) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			admin = adminDAO.findById(id);
 			return INPUT;
 		}
 		try {

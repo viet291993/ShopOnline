@@ -69,7 +69,7 @@
 					</li>
 
 					<li>
-						<a href="${pageContext.servletContext.contextPath}/blog">Tin tức</a>
+						<a href="${pageContext.servletContext.contextPath}/cart"><s:text name="client.cart"/></a>
 					</li>
 
 					<li>
@@ -85,7 +85,7 @@
 
 		<!-- Header Icon -->
 		<div class="header-icons">
-			<a href="https://www.facebook.com/cacanhhalong1992/" class="header-wrapicon1 dis-block">
+			<a href="#" class="header-wrapicon1 dis-block">
 				<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 			</a>
 
@@ -201,7 +201,7 @@
 							</li>
 		
 							<li>
-								<a href="${pageContext.servletContext.contextPath}/blog">Tin tức</a>
+								<a href="${pageContext.servletContext.contextPath}/cart"><s:text name="client.cart"/></a>
 							</li>
 		
 							<li>
@@ -311,7 +311,7 @@
 
 					<li class="item-topbar-mobile p-l-10">
 						<div class="topbar-social-mobile">
-							<a href="#" class="topbar-social-item fa fa-facebook"></a>
+							<a href="https://www.facebook.com/cacanhhalong1992/" class="topbar-social-item fa fa-facebook"></a>
 							<a href="#" class="topbar-social-item fa fa-instagram"></a>
 							<a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
 							<a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
@@ -372,7 +372,7 @@
 					</p>
 					
 					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+						<a href="https://www.facebook.com/cacanhhalong1992/" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
 						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
 						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
 						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
@@ -661,12 +661,12 @@
 	    function deleteitem(id) {
 	        $.each(shoppingCartItems, function (index, value) {
 	            if (value.id == id) {                 
-	            	shoppingCartItems.splice(index,1)                 
+	            	shoppingCartItems.splice(index,1)
+	            	return false;
 	            }
 	        })
 	        // Lưu thông tin vào sessionStorage
 	        sessionStorage["shopping-cart-items"] = JSON.stringify(shoppingCartItems); // Chuyển thông tin mảng shoppingCartItems sang JSON trước khi lưu vào sessionStorage
-	        displayCartItems();
 	        displayShoppingCartItems();
 	    };
 	    
@@ -682,11 +682,11 @@
 	            $.each(shoppingCartItems, function (index, item) {
 	                var htmlString = "";           
 	                htmlString += "<li class='header-cart-item'>";
-	                htmlString += "<div class='header-cart-item-img'>";
-	                htmlString += "<img src='images/products/"+item.img+"' alt='IMG'>"
-	                htmlString += "</div>"
+	                htmlString += "<button type='button' onclick='deleteitem("+item.id+")'><div class='header-cart-item-img'>";
+	                htmlString += "<img  src='images/products/"+item.img+"' alt='IMG'/>"
+	                htmlString += "</div></button>"
 	                htmlString += "<div class='header-cart-item-txt'>"
-	                htmlString += "<a href='#' class='header-cart-item-name'>"
+	                htmlString += "<a href='${pageContext.servletContext.contextPath}/product-detail/"+item.id+"' class='header-cart-item-name'>"
 	                htmlString +=	item.name
 	                htmlString += "</a>"
 	                htmlString += "<span class='header-cart-item-info'>"
